@@ -17,6 +17,23 @@
             %a.uk-alert-close.uk-close{href: ""}
             %p= msg
       = yield
+      - if user_signed_in?
+        %hr
+        %nav.uk-navbar
+          %ul.uk-navbar-nav
+            %li
+              .uk-navbar-content
+                Signed in as
+                = image_tag avatar_url(current_user, 16)
+                = current_user.email
+          .uk-navbar-flip
+            %ul.uk-navbar-nav
+              %li
+                = link_to lists_path, class: 'btn' do
+                  My Lists
+              %li
+                = link_to destroy_user_session_path, class: 'btn' do
+                  Log out
     .spacer
       .base-container
         .uk-vertical-align-middle.uk-width-1-2

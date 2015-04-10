@@ -122,4 +122,8 @@ table {
   .notice {
     @extend .uk-alert;
   }
+
+  .alert {
+    @extend .uk-alert;
+  }
 }
