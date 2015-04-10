@@ -29,11 +29,11 @@
           .uk-navbar-flip
             %ul.uk-navbar-nav
               %li
-                = link_to lists_path, class: 'btn' do
-                  My Lists
-              %li
                 = link_to destroy_user_session_path, class: 'btn' do
                   Log out
+              %li
+                = link_to lists_path, class: 'btn' do
+                  My Lists
     .spacer
       .base-container
         .uk-vertical-align-middle.uk-width-1-2
