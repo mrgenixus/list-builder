@@ -76,17 +76,32 @@ a.btn {
   &.primary {
     @extend .uk-button-primary;
   }
+}
 
-  &.done:before {
-    @extend .fa;
-    @extend .fa-fw;
-    @extend .fa-check-square-o;
-  }
 
+.done:before {
+  @extend .fa;
+  @extend .fa-fw;
+  @extend .fa-check-square-o;
+}
+
+a, .btn {
   &.add:before {
     @extend .fa;
     @extend .fa-fw;
     @extend .fa-plus;
+  }
+
+  &.list:before {
+    @extend .fa;
+    @extend .fa-fw;
+    @extend .fa-list;
+  }
+
+  &.sign-out:before {
+    @extend .fa;
+    @extend .fa-fw;
+    @extend .fa-sign-out;
   }
 }
 
