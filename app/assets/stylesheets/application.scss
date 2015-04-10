@@ -103,3 +103,7 @@ input, button {
     @extend .uk-button-danger;
   }
 }
+
+table {
+  @extend .uk-table;
+}
