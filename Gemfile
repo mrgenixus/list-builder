@@ -29,6 +29,7 @@ gem 'font-awesome-sass', '~> 4.3.0'
 gem 'responders'
 gem 'rabl-rails'
 gem 'underscore-rails'
+gem 'devise'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

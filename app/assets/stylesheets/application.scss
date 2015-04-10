@@ -107,3 +107,19 @@ input, button {
 table {
   @extend .uk-table;
 }
+
+.flash {
+  .success {
+    @extend .uk-alert;
+    @extend .uk-alert-success;
+  }
+
+  .errors {
+    @extend .uk-alert;
+    @extend .uk-alert-warning;
+  }
+
+  .notice {
+    @extend .uk-alert;
+  }
+}

@@ -11,6 +11,11 @@
         .uk-vertical-align-middle.uk-width-1-2
           %h1 List Builder
     .base-container
+      .flash
+        - flash.each do |name, msg|
+          %div{ class: name, data: { 'uk-alert' => true }}
+            %a.uk-alert-close.uk-close{href: ""}
+            %p= msg
       = yield
     .spacer
       .base-container

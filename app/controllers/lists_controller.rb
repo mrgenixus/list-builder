@@ -9,7 +9,7 @@ class ListsController < ApplicationController
     @list = List.new list_params
 
     if @list.save
-      redirect_to list_path(@list), success: "List was created"
+      redirect_to list_path(@list), flash: { success: "List was created" }
     else
       flash[:errors] = @list.errors.full_messages.to_sentence
       render :new
@@ -24,6 +24,17 @@ class ListsController < ApplicationController
     @membership = Membership.new
     @membership.person = Person.new
     @membership.notes.build
+  end
+
+  def update
+    @list.attributes = list_params
+
+    if @list.save
+      redirect_to edit_list_path(@list), flash: { success: "List was updated" }
+    else
+      flash[:alert] = @list.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 
   private

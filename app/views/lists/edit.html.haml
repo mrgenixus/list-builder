@@ -1,6 +1,12 @@
 .list.edit{data: {id: @list.id}}
   %h2= @list.name
   .description= @list.description
+
+  .uk-panel.uk-panel-box.uk-margin.uk-width-1-1
+    = form_for @list do |f|
+      = f.text_field :name, class: "uk-with-1-10", placeholder: "Name"
+      = f.text_field :description, class: 'uk-width-7-10', placeholder: "Description"
+      = f.submit "Update", class: "btn primary uk-width-1-10"
   .uk-panel.uk-panel-box.uk-margin.uk-width-1-2.uk-align-center
     .uk-panel-title Add Person
     %hr
