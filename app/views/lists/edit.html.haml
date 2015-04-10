@@ -40,5 +40,5 @@
           %td.actions
             = link_to "", edit_person_path(membership.person), class: 'person-edit', title: "Edit"
             = link_to "", list_membership_path(@list, membership, format: :json), method: :delete, class: 'membership-delete', title: "Delete"
-  %hr
+
   = link_to "Done", list_path(@list), class: "btn primary done"
