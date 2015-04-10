@@ -1,0 +1,13 @@
+%h2 Lists
+%table.lists
+  %tr
+    %th.name Name
+    %th.description Description
+    %th.person_count People in list
+  - @lists.each do |list|
+    %tr
+      %td= link_to list.name, list_path(list)
+      %td= list.description
+      %td= list.memberships.count
+
+= link_to "Add New", new_list_path, class: "btn primary add"

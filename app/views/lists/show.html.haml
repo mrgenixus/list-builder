@@ -1,0 +1,19 @@
+.list.show
+  %h2= @list.name
+  = link_to "Download List", url_for(format: :csv), title: "CSV"
+  = link_to "Edit List", url_for(action: :edit)
+  .description= @list.description
+  - if @list.people.count > 0
+    %h3 People in List
+    %table.people
+      %tr
+        %th.name Name
+        %th.email Email
+        %th.notes Notes
+      - @list.memberships.each do |person|
+        %tr
+          %td= person.name
+          %td= link_to person.email, "mailto: " + person.email, target: :_blank
+          %td.notes= person.notes.map(&:content).join("\n")
+
+

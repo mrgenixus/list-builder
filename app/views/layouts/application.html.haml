@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title List Builder
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .spacer
+      .base-container
+        .uk-vertical-align-middle.uk-width-1-2
+          %h1 List Builder
+    .base-container
+      = yield
+    .spacer
+      .base-container
+        .uk-vertical-align-middle.uk-width-1-2
+          &copy; 2015 Radial Development Group LLC

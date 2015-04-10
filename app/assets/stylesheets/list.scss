@@ -1,0 +1,50 @@
+.list {
+  &.show, &.edit {
+    .description {
+      font-style: italic;
+    }
+
+    form .notes {
+      @extend .uk-width-1-2;
+      overflow: auto;
+    }
+
+    table.people {
+      @extend .uk-width-4-5;
+      table-layout: fixed;
+
+      tr {
+        transition: all 1s;
+      }
+
+      th.name {
+        @extend .uk-width-1-5;
+        text-align: left
+      }
+
+      th.email {
+        @extend .uk-width-1-5;
+        text-align: left
+      }
+
+      th.notes {
+        @extend .uk-width-2-5;
+        text-align: left
+      }
+
+      th.actions {
+        @extend .uk-width-3-5;
+        text-align: left
+      }
+
+      td.notes {
+        @extend .uk-width-2-5;
+
+        white-space: nowrap;
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

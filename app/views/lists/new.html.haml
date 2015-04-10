@@ -1,0 +1,12 @@
+.list.new
+  = form_for(@list) do |f|
+    %fieldset{"data-uk-margin" => ""}
+      %legend
+        = @list.persisted? ? "Edit" : "New"
+        List
+      .row
+        = f.text_field :name, placeholder: "Name"
+      .row
+        = f.text_area :description, placeholder: "Describe this list"
+      .row
+        = f.submit

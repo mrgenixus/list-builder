@@ -1,0 +1,4 @@
+Person, Email, Notes
+<% @list.memberships.each do |person| %>
+<%= quote(person.name) %>,<%= quote person.email %>,<%= quote person.notes.map(&:content).join("\n") %>
+<% end %>
