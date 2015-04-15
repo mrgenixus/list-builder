@@ -4,8 +4,16 @@
     %title List Builder
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
   %body
+    .spacer
+      .base-container
+        .uk-vertical-align-middle.uk-width-1-2
+          %h1 Thank You
     .base-container
-      .p.notice= notice
-      .p.alert= alert
+      .flash
+        - flash.each do |name, msg|
+          %div{ class: name, data: { 'uk-alert' => true }}
+            %a.uk-alert-close.uk-close{href: ""}
+            %p= msg
       = yield

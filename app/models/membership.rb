@@ -1,7 +1,7 @@
 class Membership < ActiveRecord::Base
   belongs_to :list
   belongs_to :person, foreign_key: :person_email, primary_key: :email
-  has_many :notes
+  has_many :notes, dependent: :destroy
 
   delegate :name, :email, to: :person
 

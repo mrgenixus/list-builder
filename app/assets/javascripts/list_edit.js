@@ -99,7 +99,7 @@ $(function() {
     var membership_id = $(this).closest('[data-id]').data('id');
     $.get('/lists/' + list_id + '/memberships/' + membership_id + '.json', function(data) {
       var form = $('.list.edit form');
-      form[0].reset();
+      cleanup.call(form);
       form.find('[name="membership[person_attributes][email]"]').val(data.membership.email);
       form.find('[name="membership[person_attributes][name]"]').val(data.membership.name);
       var notes = $('<div class="notes">').append($('<p>').html($.map(data.membership.notes.split("\n"), function(note, idx) {

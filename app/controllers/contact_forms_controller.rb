@@ -4,7 +4,8 @@ class ContactFormsController < ApplicationController
 
   before_filter :allow_cors
 
-  layout "thank_you", only: :thank_you
+  layout "thank_you"
+  respond_to :json, :html
 
   def create
      @membership = Membership.where(
@@ -13,12 +14,23 @@ class ContactFormsController < ApplicationController
     ).first_or_initialize
 
     @membership.attributes = membership_params
+    @redirect_to = params[:blah] || params[:redirect_to] || params[:membership][:redirect_to]
 
     if @membership.save
-      redirect_to sign_up_thank_you_path(@membership.list), success: "List was created"
+      if @redirect_to
+        redirect_to @redirect_to
+      else
+        redirect_to sign_up_thank_you_path(@membership.list), success: "List was created"
+      end
     else
-      respond_with(@membership)
+      @membership.notes.build
+      flash[:errors] = @membership.errors.full_messages.to_sentence
+      render :new
     end
+  end
+
+  def show
+    redirect_to :back and return if request.env["HTTP_REFERER"]
   end
 
   def thank_you
