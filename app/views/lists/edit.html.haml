@@ -7,24 +7,39 @@
       = f.text_field :name, class: "uk-with-1-10", placeholder: "Name"
       = f.text_field :description, class: 'uk-width-7-10', placeholder: "Description"
       = f.submit "Update", class: "btn primary uk-width-1-10"
-  .uk-panel.uk-panel-box.uk-margin.uk-width-1-2.uk-align-center
-    .uk-panel-title Add Person
-    %hr
-    = form_for [@list, @membership], format: :json, remote: true do |f|
-      .errors
-      = f.hidden_field :list_id, value: @list.id
-      = f.fields_for :person do |f|
-        .row
-          = f.text_field :email, placeholder: "Email", autofocus: true, class: 'uk-width-2-5'
-          = f.text_field :name, placeholder: "Name", class: 'uk-width-2-5'
-      = f.fields_for :notes do |f|
-        .row
-          %div
-            = f.text_area :content, placeholder: "Enter notes about this person here", class: "uk-width-1-1", rows: 6
-      %hr
-      .row
-        = f.submit "Add Person"
-        = f.button "Clear", type: :reset
+  .uk-grid
+    .uk-width-medium-1-2
+      .uk-panel.uk-panel-box.uk-margin
+        .uk-panel-title Add Person
+        %hr
+        = form_for [@list, @membership], format: :json, remote: true do |f|
+          .errors
+          = f.hidden_field :list_id, value: @list.id
+          = f.fields_for :person do |f|
+            .row
+              = f.text_field :email, placeholder: "Email", autofocus: true, class: 'uk-width-2-5'
+              = f.text_field :name, placeholder: "Name", class: 'uk-width-2-5'
+          = f.fields_for :notes do |f|
+            .row
+              %div
+                = f.text_area :content, placeholder: "Enter notes about this person here", class: "uk-width-1-1", rows: 6
+          %hr
+          .row
+            = f.submit "Add Person"
+            = f.button "Clear", type: :reset
+    .uk-width-medium-1-2.uk-hidden.person-detail
+      .uk-panel.uk-panel-box.uk-margin
+        .uk-panel-title
+          Detail
+          %a.uk-close.uk-panel-badge(href='#')
+        %hr
+        .body
+          .scrollable
+            %h3 Notes
+            %ul.uk-list-line.uk-list.notes
+            %h3 Meta Data
+            %dl.uk-description-list-horizontal.meta_data
+
   - if @list.memberships.count > 0
     %h3 People in List
     %hr

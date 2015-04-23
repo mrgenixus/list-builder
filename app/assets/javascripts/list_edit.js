@@ -8,6 +8,34 @@ $(function() {
       });
   }
 
+  function wrap(tag, attributes) {
+    if ($.isObject(tag)) {
+      attributes = tag;
+      tag = undefined;
+    }
+    var $tag = $('<' + (tag||'div') + '>').attr(attributes||{});
+    return function wrap(inner) {
+      return $tag.clone().html(inner);
+    };
+  }
+
+  function paragraph(note) {
+    return $.map(note.split(/\n/), wrap('p'));
+  }
+
+  function paragraphs(note) {
+    return wrap('li')(paragraph(note));
+  }
+
+  function definition_list_items(term, definition) {
+    return [wrap('dt')(term), wrap('dd')(definition)];
+  }
+
+  $.isObject = function(obj) {
+    var type = typeof obj;
+    return type === 'function' || type === 'object' && !!obj;
+  };
+
   $(document).on('submit', '.list.edit form', cleanup);
 
   $(document).on('ajax:error', '.list.edit form', function(event, data) {
@@ -75,7 +103,7 @@ $(function() {
 
   function cleanup() {
     $(this).find('.errors').empty();
-    $(this).find('div.notes').remove();
+    $('.person-detail').addClass('uk-hidden');
   }
 
   function reset() {
@@ -86,6 +114,9 @@ $(function() {
   }
 
   $(document).on('reset', '.list.edit form', reset);
+  $(document).on('click', '.person-detail .uk-close', function() {
+    $('.list.edit form').trigger('reset');
+  });
 
   $('.list.edit').on('click', '.membership-delete', function(event) {
     $(event.target).parent().parent().fadeOut("fast", function() {
@@ -100,12 +131,15 @@ $(function() {
     $.get('/lists/' + list_id + '/memberships/' + membership_id + '.json', function(data) {
       var form = $('.list.edit form');
       cleanup.call(form);
+
       form.find('[name="membership[person_attributes][email]"]').val(data.membership.email);
       form.find('[name="membership[person_attributes][name]"]').val(data.membership.name);
-      var notes = $('<div class="notes">').append($('<p>').html($.map(data.membership.notes.split("\n"), function(note, idx) {
-        return $('<blockquote>').html(note);
-      }))).prepend($("<h3>").html("Notes:"));
-      form.find('[name="membership[notes_attributes][0][content]"]').focus().parent().before(notes);
+
+      $('.person-detail').removeClass('uk-hidden');
+
+      var notes = $('.person-detail .notes').html(($.map(data.membership.notes, paragraphs)));
+      var meta_data = $('.person-detail .meta_data').html(($.map(data.membership.meta_data, definition_list_items)));
+
       form.find('[type=submit]').val('Update Person');
     });
   });

@@ -9,12 +9,14 @@ class ContactFormsController < ApplicationController
 
   def create
      @membership = Membership.where(
-      person_email: membership_params[:person_attributes][:email],
+      person_email: membership_params[:person_attributes].try(:[], :email),
       list_id: membership_params[:list_id]
     ).first_or_initialize
 
     @membership.attributes = membership_params
     @redirect_to = params[:blah] || params[:redirect_to] || params[:membership][:redirect_to]
+
+    binding.pry
 
     if @membership.save
       if @redirect_to
@@ -55,6 +57,10 @@ class ContactFormsController < ApplicationController
   end
 
   def membership_params
-    params.require(:membership).permit(:list_id, :person_attributes => [:name, :email], :notes_attributes => [:content])
+    params.require(:membership).permit(:list_id, {
+      :person_attributes => [:name, :email],
+      :notes_attributes => [:content],
+      :metas_attributes => [:key, :value]
+    })
   end
 end

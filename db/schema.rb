@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410032631) do
+ActiveRecord::Schema.define(version: 20150423011157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(version: 20150410032631) do
   end
 
   add_index "memberships", ["list_id"], name: "index_memberships_on_list_id", using: :btree
+
+  create_table "meta", force: :cascade do |t|
+    t.string  "key"
+    t.text    "value"
+    t.integer "membership_id"
+  end
+
+  add_index "meta", ["membership_id"], name: "index_meta_on_membership_id", using: :btree
 
   create_table "notes", force: :cascade do |t|
     t.text    "content"
@@ -62,4 +70,5 @@ ActiveRecord::Schema.define(version: 20150410032631) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "meta", "memberships"
 end
