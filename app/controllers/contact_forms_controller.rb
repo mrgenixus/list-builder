@@ -16,13 +16,19 @@ class ContactFormsController < ApplicationController
     @membership.attributes = membership_params
     @redirect_to = params[:blah] || params[:redirect_to] || params[:membership][:redirect_to]
 
-    binding.pry
-
     if @membership.save
-      if @redirect_to
-        redirect_to @redirect_to
-      else
-        redirect_to sign_up_thank_you_path(@membership.list), success: "List was created"
+      respond_to do |format|
+        format.html do
+          if @redirect_to
+            redirect_to @redirect_to
+          else
+            redirect_to sign_up_thank_you_path(@membership.list), success: "List was created"
+          end
+        end
+
+        format.json do
+          respond_with(@membership.list, @membership)
+        end
       end
     else
       @membership.notes.build
