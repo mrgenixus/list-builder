@@ -25,7 +25,7 @@
               .uk-navbar-content
                 Signed in as
                 = image_tag avatar_url(current_user, 16)
-                = current_user.email
+                = current_user.name || current_user.email
           .uk-navbar-flip
             %ul.uk-navbar-nav
               %li
