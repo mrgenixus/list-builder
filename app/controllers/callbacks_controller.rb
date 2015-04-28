@@ -1,5 +1,5 @@
 class CallbacksController < Devise::OmniauthCallbacksController
-  def sign_in
+  def primary
     if current_user
       if current_user.update_from_omniauth(request.env["omniauth.auth"])
         flash.notice = "Authentication provider updated"
@@ -19,6 +19,6 @@ class CallbacksController < Devise::OmniauthCallbacksController
       end
     end
   end
-  alias_method :google_oauth2, :sign_in
-  alias_method :github, :sign_in
+  alias_method :google_oauth2, :primary
+  alias_method :github, :primary
 end
