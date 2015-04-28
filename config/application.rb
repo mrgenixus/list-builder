@@ -6,10 +6,10 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# begin
+begin
     ENV.update(YAML.load_file('config/application.yml')[Rails.env])
-# rescue
-# end
+rescue
+end
 
 module ListBuilder
   class Application < Rails::Application
@@ -29,3 +29,4 @@ module ListBuilder
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
+
