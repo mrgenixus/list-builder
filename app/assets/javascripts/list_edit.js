@@ -27,8 +27,8 @@ $(function() {
     return wrap('li')(paragraph(note));
   }
 
-  function definition_list_items(term, definition) {
-    return [wrap('dt')(term), wrap('dd')(definition)];
+  function definition_list_items(definition, title) {
+    return [wrap('dt')(title), wrap('dd')(definition)];
   }
 
   $.isObject = function(obj) {

@@ -15,7 +15,6 @@ class ContactFormsController < ApplicationController
 
     @membership.attributes = membership_params
     @redirect_to = params[:blah] || params[:redirect_to] || params[:membership][:redirect_to]
-
     if @membership.save
       respond_to do |format|
         format.html do
