@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150428160220) do
+ActiveRecord::Schema.define(version: 20150501151503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "lists", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.string   "name"
     t.text     "description"
+    t.string   "incoming_message_email"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -39,8 +40,10 @@ ActiveRecord::Schema.define(version: 20150428160220) do
   add_index "meta", ["membership_id"], name: "index_meta_on_membership_id", using: :btree
 
   create_table "notes", force: :cascade do |t|
-    t.text    "content"
-    t.integer "membership_id"
+    t.text     "content"
+    t.integer  "membership_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "notes", ["membership_id"], name: "index_notes_on_membership_id", using: :btree

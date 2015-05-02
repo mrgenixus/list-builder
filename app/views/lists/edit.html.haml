@@ -5,7 +5,8 @@
   .uk-panel.uk-panel-box.uk-margin.uk-width-1-1
     = form_for @list do |f|
       = f.text_field :name, class: "uk-with-1-10", placeholder: "Name"
-      = f.text_field :description, class: 'uk-width-7-10', placeholder: "Description"
+      = f.text_field :description, class: 'uk-width-5-10', placeholder: "Description"
+      = f.text_field :incoming_message_email, class: 'uk-width-2-10', placeholder: "Contact Email"
       = f.submit "Update", class: "btn primary uk-width-1-10"
   .uk-grid
     .uk-width-medium-1-2

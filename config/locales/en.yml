@@ -21,3 +21,8 @@
 
 en:
   hello: "Hello world"
+  time:
+    formats:
+      short_date: '%B %-d, %Y'
+      short_time: '%l:%M %p'
+

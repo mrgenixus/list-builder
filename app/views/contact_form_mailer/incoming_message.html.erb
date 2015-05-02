@@ -1,0 +1,23 @@
+<% if @membership.notes.count > 1 %>
+  <h2><%= @membership.name %> just updated their info</h2>
+<% else %>
+  <h2><%= @membership.name %> just sent you a note</h2>
+<% end %>
+
+<% @membership.notes.order(created_at: :desc).each do |note| %>
+  <% if note.created_at.present? %>
+    on <%= l note.created_at, format: :short_date %> at <%= l note.created_at, format: :short_time %>
+    <% end %>
+  <% note.content %>
+  <hr>
+<% end %>
+
+<% if @membership.metas.count > 0 %>
+  <h3>Additional Information</h3>
+  <dl>
+    <% @membership.metas.each do |meta| %>
+      <dt><%= meta.key %></dt>
+      <dd><%= meta.value %></dd>
+    <% end %>
+  </dl>
+<% end %>

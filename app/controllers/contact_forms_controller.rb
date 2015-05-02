@@ -16,6 +16,9 @@ class ContactFormsController < ApplicationController
     @membership.attributes = membership_params
     @redirect_to = params[:blah] || params[:redirect_to] || params[:membership][:redirect_to]
     if @membership.save
+      if @membership.list.incoming_message_email.present?
+        ContactFormMailer.incoming_message(@membership.id).deliver
+      end
       respond_to do |format|
         format.html do
           if @redirect_to
@@ -24,7 +27,6 @@ class ContactFormsController < ApplicationController
             redirect_to sign_up_thank_you_path(@membership.list), success: "List was created"
           end
         end
-
         format.json do
           respond_with(@membership.list, @membership)
         end
