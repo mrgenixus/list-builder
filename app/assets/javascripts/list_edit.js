@@ -110,6 +110,7 @@ $(function() {
     this.reset();
     $(this.elements).filter(':visible').first().focus();
     $(this).find('[type=submit]').val('Add Person');
+    $(this).parent().find('.form-title').text('Add Person');
     cleanup.call(this);
   }
 
@@ -141,6 +142,7 @@ $(function() {
       var meta_data = $('.person-detail .meta_data').html(($.map(data.membership.meta_data, definition_list_items)));
 
       form.find('[type=submit]').val('Update Person');
+      form.parent().find('.form-title').text('Update Person');
     });
   });
 });
